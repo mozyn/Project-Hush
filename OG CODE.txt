@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ZXing;
+using ZXing.QrCode;
+
+namespace QR_Code_Password_Encryption
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Please enter something in the textbox");
+                return; // return because we don't want to run normal code of buton click
+            }
+
+            var options = new QrCodeEncodingOptions
+            {
+                Height = pictureBox1.Height,
+                Width = pictureBox1.Width
+            };
+            //create an instance of BarcodeWriter
+            var writer = new BarcodeWriter();
+            //set format
+            writer.Format = BarcodeFormat.QR_CODE;
+            writer.Options = options;
+            //grab data from textbox
+            //var text = textBox1.Text;
+
+            //encrypt
+            string encrypted = "";
+            for (int i = 0; i < textBox1.Text.Length; i++)
+            {
+                encrypted += Convert.ToChar((textBox1.Text[i] + 8) - 6);
+            }
+            textBox1.Text = encrypted;
+            //pass in data and store in variable
+            var result = writer.Write(encrypted);
+            pictureBox1.Image = result;
+        }
+
+        //decrypt button
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string decrypted = "";
+            for (int i = 0; i < textBox1.Text.Length; i++)
+            {
+                decrypted += Convert.ToChar((textBox1.Text[i] + 6) -8);
+            }
+            textBox1.Text = decrypted;
+        }
+        
+       
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var dialog = new SaveFileDialog();
+            dialog.InitialDirectory = path;
+            dialog.Filter = "PNG| *.png|JPEG|*.jpg|BMP|*.bmp|GIF|*.gif"; //default file types
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image.Save(dialog.FileName);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                var reader = new BarcodeReader();
+                var imgFile = Image.FromFile(dialog.FileName) as Bitmap;
+                pictureBox1.Image = imgFile;
+                var result = reader.Decode(imgFile);
+
+                string decrypted = "";
+                for (int i = 0; i < result.Text.Length; i++)
+                {
+                    decrypted += Convert.ToChar((result.Text[i] + 1) - 2);
+                }
+                textBox1.Text = decrypted;
+
+            }
+        }
+    }
+}
