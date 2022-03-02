@@ -19,7 +19,7 @@ namespace QR_Code_Password_Encryption
             InitializeComponent();
         }
 
-       
+        bool encryptButtonClicked = false;
 
         //randomized custom ASCII
         char[] charTable = { '~', '@', 'X', '#', '3', 'Y', 'a', '+', 'K', 'E', 'I', 'x', '{', '/', '+', 'f', ';', 'b', 'L', 'P', '|', '7', '-', '`', 'v', 'S', '[', 'n', 'H', 'r', '9', 'u', 'J', 'G', ']', 'U', '\\', ',', 'j', '0', '6', 'e', '^', 'p', 'd', '4', 'O', 'z', 't', 'h', '8', 'q', 'M', 'T', 'C', 'k', 'N', '5', ')', 'F', '>', '\"', 'Q', 'A', 'l', 's', 'D', ':', '<', '(', '_', '$', '&', 'g', 'i', '2', '!', 'B', 'R', 'W', '?', '.', ';', 'm', '}', 'y', 'V', 'Z', 'c', '1', '*', '\'', '%', 'w', 'o' };
@@ -65,7 +65,6 @@ namespace QR_Code_Password_Encryption
             string decrypted = "";
             for (int i = 0; i < textBox1.Text.Length; i++)
             {
-
                 currentASCII = (textBox1.Text[i]-32);
                 currentASCII -= (int)(BirthMonthSelect.Value * 100 + BirthDaySelect.Value);
                 currentASCII %= 94;
@@ -85,9 +84,12 @@ namespace QR_Code_Password_Encryption
         //encrypt button
         private void button1_Click(object sender, EventArgs e)
         {
+            encryptButtonClicked = true;
+            button2.Enabled = true;
             if (textBox1.Text.Trim() == string.Empty)
             {
                 MessageBox.Show("Please enter something in the textbox.");
+                encryptButtonClicked=false;
                 return; // return because we don't want to run normal code of buton click
             }
 
@@ -114,35 +116,42 @@ namespace QR_Code_Password_Encryption
                 pictureBox1.Image = result;
             }
             
-           
-           
-            
         }
+
+        
 
         //decrypt button
         private void button2_Click(object sender, EventArgs e)
         {
-            var options = new QrCodeEncodingOptions
+            if (encryptButtonClicked == false)
             {
-                Height = pictureBox1.Height,
-                Width = pictureBox1.Width
-            };
-            //create an instance of BarcodeWriter
-            var writer = new BarcodeWriter();
-            //set format
-            writer.Format = BarcodeFormat.QR_CODE;
-            writer.Options = options;
-
-            if (textBox1.Text == string.Empty)
-            {
-                MessageBox.Show("ERROR!");
+                button2.Enabled = false;
             }
             else
             {
-                var result = writer.Write(decryptPass());
-                pictureBox1.Image = result;
-            }
+                button2.Enabled = true;
+                var options = new QrCodeEncodingOptions
+                {
+                    Height = pictureBox1.Height,
+                    Width = pictureBox1.Width
+                };
+                //create an instance of BarcodeWriter
+                var writer = new BarcodeWriter();
+                //set format
+                writer.Format = BarcodeFormat.QR_CODE;
+                writer.Options = options;
 
+                if (textBox1.Text == string.Empty)
+                {
+                    MessageBox.Show("No valid character in the textbox!");
+                }
+                else
+                {
+                    var result = writer.Write(decryptPass());
+                    pictureBox1.Image = result;
+                }
+
+            }
         }
         
        //save QR

@@ -40,6 +40,7 @@
             this.BirthDaySelect = new System.Windows.Forms.NumericUpDown();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BirthMonthSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BirthDaySelect)).BeginInit();
@@ -93,6 +94,7 @@
             this.button3.Size = new System.Drawing.Size(90, 34);
             this.button3.TabIndex = 4;
             this.button3.Text = "Save QR";
+            this.toolTip1.SetToolTip(this.button3, "Make sure your birth month and day are correct!");
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -103,6 +105,7 @@
             this.button4.Size = new System.Drawing.Size(90, 34);
             this.button4.TabIndex = 5;
             this.button4.Text = "Decrypt QR";
+            this.toolTip1.SetToolTip(this.button4, "Make sure your birth month and day are correct!\r\n");
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -166,11 +169,20 @@
             this.toolTip2.InitialDelay = 250;
             this.toolTip2.ReshowDelay = 100;
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(43, 226);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(222, 138);
+            this.label1.TabIndex = 8;
+            this.label1.Text = resources.GetString("label1.Text");
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 434);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.BirthDaySelect);
             this.Controls.Add(this.BirthMonthSelect);
             this.Controls.Add(this.button4);
@@ -202,6 +214,7 @@
         private System.Windows.Forms.NumericUpDown BirthDaySelect;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
