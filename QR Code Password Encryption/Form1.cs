@@ -33,9 +33,9 @@ namespace QR_Code_Password_Encryption
             string temp = "";
             for (int i = 0; i < textBox1.Text.Length; i++)
             {
-                for (int j = 0; j < charTable.Length; j++)
+                if (textBox1.Text[i] > 32 && textBox1.Text[i] < 127)
                 {
-                    if (textBox1.Text[i] > 33 || textBox1.Text[i] < 127)
+                    for (int j = 0; j < charTable.Length; j++)
                     {
                         if (textBox1.Text[i] == charTable[j])
                         {
@@ -45,12 +45,12 @@ namespace QR_Code_Password_Encryption
                             encrypted += Convert.ToChar(temp[i] + 32); //algorithm
                         }
                     }
-                    else
-                    {
-                        encrypted = "ERROR";
-                        textBox1.Text = encrypted;
-                        return encrypted;
-                    }
+                }
+                else
+                {
+                    encrypted = "ERROR";
+                    textBox1.Text = encrypted;
+                    return encrypted;
                 }
             }
             textBox1.Text = encrypted;

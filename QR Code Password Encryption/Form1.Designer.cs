@@ -41,6 +41,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BirthMonthSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BirthDaySelect)).BeginInit();
@@ -171,17 +174,47 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(43, 226);
+            this.label1.Location = new System.Drawing.Point(12, 226);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(222, 138);
+            this.label1.Size = new System.Drawing.Size(271, 32);
             this.label1.TabIndex = 8;
-            this.label1.Text = resources.GetString("label1.Text");
+            this.label1.Text = "1. To Encrypt your password, enter it in the textbox, \r\n    select your birth mon" +
+    "th and day then click Encrypt!";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(12, 258);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(271, 32);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "2. To decrypt your password, select your birth month \r\n     and day and click Dec" +
+    "rypt!";
+            // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(12, 290);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(271, 32);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "3. To Save a QR Code version of your encrypted \r\n     password, click Save QR!";
+            // 
+            // label4
+            // 
+            this.label4.Location = new System.Drawing.Point(12, 322);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(282, 32);
+            this.label4.TabIndex = 11;
+            this.label4.Text = "4. To Decrypt a QR Code from a file on your computer,\r\n     select your birth mon" +
+    "th and day and click Decrypt QR!";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 434);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BirthDaySelect);
             this.Controls.Add(this.BirthMonthSelect);
@@ -215,6 +248,9 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
     }
 }
 
